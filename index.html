@@ -2,144 +2,232 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SK Personal Cloud — Laptop Vault</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Dell G15 Server</title>
+  <meta name="application-name" content="Dell G15 Server" />
+  <meta name="description" content="Dell G15 Server — Distributed multi-laptop personal cloud and One UI file explorer." />
+  <meta name="theme-color" content="#05070c" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Dell G15 Server" />
+  <meta property="og:title" content="Dell G15 Server" />
+  <meta property="og:description" content="Distributed multi-laptop cloud storage & One UI File Explorer." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://dell-g15-server.pages.dev" />
+  <meta property="og:image" content="favicon.png" />
+
+  <!-- Favicon & App Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon.png" />
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="ambient-glow glow-1"></div>
-  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-orb orb-blue"></div>
+  <div class="ambient-orb orb-indigo"></div>
 
   <!-- Non-Stacking Custom Toast -->
-  <div id="toast" class="toast-pill" aria-live="polite"></div>
+  <div id="toast" class="toast-pill" role="status" aria-live="polite"></div>
 
-  <div class="app-shell">
-    <!-- Top Header -->
-    <header class="glass-header">
-      <div class="brand">
-        <span class="brand-mark"></span>
+  <div class="app-container">
+    <!-- Top One UI Capsule Header -->
+    <header class="oneui-header">
+      <div class="brand-cluster">
+        <img src="favicon.png" alt="Dell G15 Server" class="brand-icon" onerror="this.style.display='none'" />
         <div>
-          <h1>SK Personal Cloud</h1>
-          <p class="subtitle">Direct Laptop-Hosted Vault</p>
+          <h1>Dell G15 Server</h1>
+          <p class="sub-caption">Distributed Laptop Storage Explorer</p>
         </div>
       </div>
 
-      <div class="header-actions">
-        <div id="serverPill" class="capsule-pill status-pill offline" role="button" tabindex="0" title="Click to refresh server status">
-          <span id="statusDot" class="status-dot"></span>
-          <span id="statusText">Checking Laptop Server...</span>
+      <div class="header-controls">
+        <div id="nodesPill" class="capsule-pill status-pill offline" role="button" tabindex="0" title="Click to inspect connected laptop nodes">
+          <span class="pulse-dot"></span>
+          <span id="nodesStatusText">Scanning Laptops...</span>
         </div>
 
-        <div id="logoutBtn" class="capsule-btn danger hidden" role="button" tabindex="0">
+        <div id="signOutBtn" class="capsule-btn danger hidden" role="button" tabindex="0">
           Sign Out
         </div>
       </div>
     </header>
 
-    <!-- Authentication View -->
-    <main id="authView" class="center-stage">
-      <section class="glass-card auth-card">
-        <div class="capsule-tabs">
-          <div id="tabLogin" class="capsule-tab active" role="button" tabindex="0">Sign In</div>
-          <div id="tabRegister" class="capsule-tab" role="button" tabindex="0">Create Account</div>
+    <!-- Authentication Screen -->
+    <main id="authScreen" class="auth-stage">
+      <section class="squircle-card auth-box">
+        <div class="segment-tabs">
+          <div id="loginTab" class="segment-tab active" role="button" tabindex="0">Sign In</div>
+          <div id="registerTab" class="segment-tab" role="button" tabindex="0">Create Account</div>
         </div>
 
-        <h2 id="authHeading">Access Your Laptop Vault</h2>
-        <p id="authSubtext" class="muted-text">All credentials and files are stored directly on the host laptop.</p>
+        <h2 id="authTitle">My Files Vault</h2>
+        <p class="muted">Accounts and file chunks are stored directly across connected laptops.</p>
 
-        <div class="form-stack">
-          <div id="displayNameWrap" class="input-group hidden">
+        <div class="stack-form">
+          <div id="displayNameField" class="field-wrap hidden">
             <label for="displayNameInput">Display Name</label>
-            <input id="displayNameInput" class="capsule-input" type="text" placeholder="e.g. Sanchar Koirala" autocomplete="name" />
+            <input id="displayNameInput" class="capsule-input" type="text" placeholder="Sanchar Koirala" autocomplete="name" />
           </div>
 
-          <div class="input-group">
+          <div class="field-wrap">
             <label for="usernameInput">Username</label>
             <input id="usernameInput" class="capsule-input" type="text" placeholder="Enter username" autocomplete="username" />
           </div>
 
-          <div class="input-group">
+          <div class="field-wrap">
             <label for="passwordInput">Password</label>
             <input id="passwordInput" class="capsule-input" type="password" placeholder="Enter password" autocomplete="current-password" />
           </div>
 
-          <div id="authSubmitBtn" class="capsule-btn primary full-width" role="button" tabindex="0">
-            <span id="authSubmitLabel">Sign In to Vault</span>
+          <div id="authActionBtn" class="capsule-btn primary full" role="button" tabindex="0">
+            <span id="authActionLabel">Unlock My Files</span>
           </div>
         </div>
       </section>
     </main>
 
-    <!-- User Cloud Dashboard -->
-    <main id="vaultView" class="dashboard-grid hidden">
-      <!-- Top User Overview Strip -->
-      <section class="glass-card overview-bar">
-        <div>
-          <h2 id="welcomeUser">Welcome back</h2>
-          <p id="storageStats" class="muted-text">0 items • 0 B stored on laptop</p>
+    <!-- Galaxy S26 Ultra One UI File Explorer -->
+    <main id="explorerScreen" class="explorer-layout hidden">
+      <!-- Storage Analyzer Card -->
+      <section class="squircle-card storage-card">
+        <div class="storage-top">
+          <div>
+            <h2 id="greetingTitle">My Files</h2>
+            <p id="poolHeadline" class="muted">Calculating distributed laptop storage...</p>
+          </div>
+          <div class="storage-actions">
+            <div id="newFolderBtn" class="capsule-btn subtle" role="button" tabindex="0">+ New Folder</div>
+            <div id="uploadTriggerBtn" class="capsule-btn primary" role="button" tabindex="0">↑ Upload Files</div>
+            <input id="hiddenFileInput" type="file" multiple hidden />
+          </div>
         </div>
-        <div id="refreshVaultBtn" class="capsule-btn subtle" role="button" tabindex="0">
-          Sync Now
+
+        <!-- Multi-Segment Storage Bar -->
+        <div class="storage-bar-track">
+          <div id="barMyUsed" class="bar-seg seg-me" style="width: 0%"></div>
+          <div id="barOthersUsed" class="bar-seg seg-others" style="width: 0%"></div>
+        </div>
+
+        <div class="storage-legend">
+          <div class="legend-item">
+            <span class="dot-me"></span>
+            <span id="statMyUsed">Your Used: 0 B</span>
+          </div>
+          <div class="legend-item">
+            <span class="dot-others"></span>
+            <span id="statOthersUsed">Other Users: 0 B</span>
+          </div>
+          <div class="legend-item">
+            <span class="dot-free"></span>
+            <span id="statPoolFree">Total Available: 0 B</span>
+          </div>
         </div>
       </section>
 
-      <!-- Left Column: Upload & Quick Note -->
-      <div class="left-column">
-        <section class="glass-card">
-          <h3>Upload Anything to Laptop</h3>
-          <p class="muted-text">Videos, photos, archives, documents, or APKs stream straight to the laptop folder.</p>
-
-          <div id="dropZone" class="drop-zone" role="button" tabindex="0">
-            <div class="drop-icon">↑</div>
-            <p class="drop-title">Drop files here or click to browse</p>
-            <span class="muted-text">Supports multiple files up to 2 GB per batch</span>
-            <input id="fileInput" type="file" multiple hidden />
+      <!-- One UI Quick Category Tiles -->
+      <section class="category-strip">
+        <div class="cat-tile active" data-cat="all" role="button" tabindex="0">
+          <span class="cat-badge c-all">ALL</span>
+          <div>
+            <div class="cat-name">All Items</div>
+            <div id="countAll" class="cat-count">0 items</div>
           </div>
-
-          <div id="uploadProgressWrap" class="progress-wrap hidden">
-            <div class="progress-track">
-              <div id="uploadProgressBar" class="progress-fill"></div>
-            </div>
-            <span id="uploadProgressText" class="muted-text">Uploading... 0%</span>
+        </div>
+        <div class="cat-tile" data-cat="image" role="button" tabindex="0">
+          <span class="cat-badge c-img">IMG</span>
+          <div>
+            <div class="cat-name">Images</div>
+            <div id="countImage" class="cat-count">0 files</div>
           </div>
-        </section>
-
-        <section class="glass-card">
-          <h3>Store Text / Data Record</h3>
-          <p class="muted-text">Save links, code snippets, or notes inside your laptop's JSON database.</p>
-
-          <div class="form-stack">
-            <input id="noteTitleInput" class="capsule-input" type="text" placeholder="Record title (e.g. API Key, Note)" />
-            <textarea id="noteContentInput" class="glass-textarea" rows="4" placeholder="Write anything you want to store..."></textarea>
-            <div id="saveNoteBtn" class="capsule-btn primary full-width" role="button" tabindex="0">
-              Save to Laptop Database
-            </div>
+        </div>
+        <div class="cat-tile" data-cat="video" role="button" tabindex="0">
+          <span class="cat-badge c-vid">VID</span>
+          <div>
+            <div class="cat-name">Videos</div>
+            <div id="countVideo" class="cat-count">0 files</div>
           </div>
-        </section>
-      </div>
+        </div>
+        <div class="cat-tile" data-cat="audio" role="button" tabindex="0">
+          <span class="cat-badge c-aud">AUD</span>
+          <div>
+            <div class="cat-name">Audio</div>
+            <div id="countAudio" class="cat-count">0 files</div>
+          </div>
+        </div>
+        <div class="cat-tile" data-cat="pdf" role="button" tabindex="0">
+          <span class="cat-badge c-pdf">PDF</span>
+          <div>
+            <div class="cat-name">Documents</div>
+            <div id="countPdf" class="cat-count">0 files</div>
+          </div>
+        </div>
+        <div class="cat-tile" data-cat="code" role="button" tabindex="0">
+          <span class="cat-badge c-cod">&lt;/&gt;</span>
+          <div>
+            <div class="cat-name">Code &amp; Text</div>
+            <div id="countCode" class="cat-count">0 files</div>
+          </div>
+        </div>
+      </section>
 
-      <!-- Right Column: Stored Items Explorer -->
-      <section class="glass-card explorer-card">
-        <div class="explorer-toolbar">
-          <input id="searchInput" class="capsule-input search-input" type="text" placeholder="Search your stored files & notes..." />
-          <div class="filter-group">
-            <div id="filterAll" class="capsule-chip active" role="button" tabindex="0">All</div>
-            <div id="filterFiles" class="capsule-chip" role="button" tabindex="0">Files</div>
-            <div id="filterNotes" class="capsule-chip" role="button" tabindex="0">Notes</div>
+      <!-- Active Upload Progress Banner -->
+      <section id="uploadBanner" class="squircle-card upload-banner hidden">
+        <div class="upload-banner-head">
+          <strong id="uploadStatusLabel">Distributing chunks across laptops...</strong>
+          <span id="uploadPctLabel" class="muted">0%</span>
+        </div>
+        <div class="storage-bar-track">
+          <div id="uploadFillBar" class="bar-seg seg-me" style="width: 0%"></div>
+        </div>
+      </section>
+
+      <!-- Main Directory Browser Card -->
+      <section id="dropArea" class="squircle-card browser-card">
+        <div class="browser-toolbar">
+          <div id="breadcrumbsBar" class="breadcrumbs"></div>
+
+          <div class="toolbar-right">
+            <input id="searchBox" class="capsule-input search-box" type="text" placeholder="Search files &amp; folders..." />
+            <div id="viewGridBtn" class="capsule-chip active" role="button" tabindex="0">Grid</div>
+            <div id="viewListBtn" class="capsule-chip" role="button" tabindex="0">List</div>
+            <div id="syncBtn" class="capsule-chip" role="button" tabindex="0">Sync</div>
           </div>
         </div>
 
-        <div id="itemsGrid" class="items-list"></div>
-        <div id="emptyState" class="empty-state hidden">
-          <p>Your laptop vault is empty.</p>
-          <span class="muted-text">Upload a file or save a note on the left to store it permanently on the laptop.</span>
+        <div id="explorerItems" class="explorer-grid"></div>
+
+        <div id="emptyFolderState" class="empty-box hidden">
+          <p>This folder is empty</p>
+          <span class="muted">Drag and drop files here or click Upload Files to distribute them across connected laptops.</span>
         </div>
       </section>
     </main>
 
-    <footer class="glass-footer">
+    <footer class="app-footer">
       © 2026 Sanchar Koirala | All rights reserved
     </footer>
+  </div>
+
+  <!-- Universal One UI Media / Code / PDF / Details Modal -->
+  <div id="viewerModal" class="modal-backdrop hidden">
+    <div class="squircle-card modal-sheet">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h3 id="modalTitle">Preview</h3>
+          <p id="modalSubtitle" class="muted"></p>
+        </div>
+        <div class="modal-actions">
+          <div id="modalSaveCodeBtn" class="capsule-btn primary small hidden" role="button" tabindex="0">Save Changes</div>
+          <div id="modalDownloadBtn" class="capsule-btn subtle small hidden" role="button" tabindex="0">Download</div>
+          <div id="modalCloseBtn" class="capsule-btn danger small" role="button" tabindex="0">Close</div>
+        </div>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+    </div>
   </div>
 
   <script src="app.js"></script>
