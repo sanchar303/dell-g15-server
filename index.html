@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SK Personal Cloud — Laptop Vault</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <!-- Non-Stacking Custom Toast -->
+  <div id="toast" class="toast-pill" aria-live="polite"></div>
+
+  <div class="app-shell">
+    <!-- Top Header -->
+    <header class="glass-header">
+      <div class="brand">
+        <span class="brand-mark"></span>
+        <div>
+          <h1>SK Personal Cloud</h1>
+          <p class="subtitle">Direct Laptop-Hosted Vault</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div id="serverPill" class="capsule-pill status-pill offline" role="button" tabindex="0" title="Click to refresh server status">
+          <span id="statusDot" class="status-dot"></span>
+          <span id="statusText">Checking Laptop Server...</span>
+        </div>
+
+        <div id="logoutBtn" class="capsule-btn danger hidden" role="button" tabindex="0">
+          Sign Out
+        </div>
+      </div>
+    </header>
+
+    <!-- Authentication View -->
+    <main id="authView" class="center-stage">
+      <section class="glass-card auth-card">
+        <div class="capsule-tabs">
+          <div id="tabLogin" class="capsule-tab active" role="button" tabindex="0">Sign In</div>
+          <div id="tabRegister" class="capsule-tab" role="button" tabindex="0">Create Account</div>
+        </div>
+
+        <h2 id="authHeading">Access Your Laptop Vault</h2>
+        <p id="authSubtext" class="muted-text">All credentials and files are stored directly on the host laptop.</p>
+
+        <div class="form-stack">
+          <div id="displayNameWrap" class="input-group hidden">
+            <label for="displayNameInput">Display Name</label>
+            <input id="displayNameInput" class="capsule-input" type="text" placeholder="e.g. Sanchar Koirala" autocomplete="name" />
+          </div>
+
+          <div class="input-group">
+            <label for="usernameInput">Username</label>
+            <input id="usernameInput" class="capsule-input" type="text" placeholder="Enter username" autocomplete="username" />
+          </div>
+
+          <div class="input-group">
+            <label for="passwordInput">Password</label>
+            <input id="passwordInput" class="capsule-input" type="password" placeholder="Enter password" autocomplete="current-password" />
+          </div>
+
+          <div id="authSubmitBtn" class="capsule-btn primary full-width" role="button" tabindex="0">
+            <span id="authSubmitLabel">Sign In to Vault</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- User Cloud Dashboard -->
+    <main id="vaultView" class="dashboard-grid hidden">
+      <!-- Top User Overview Strip -->
+      <section class="glass-card overview-bar">
+        <div>
+          <h2 id="welcomeUser">Welcome back</h2>
+          <p id="storageStats" class="muted-text">0 items • 0 B stored on laptop</p>
+        </div>
+        <div id="refreshVaultBtn" class="capsule-btn subtle" role="button" tabindex="0">
+          Sync Now
+        </div>
+      </section>
+
+      <!-- Left Column: Upload & Quick Note -->
+      <div class="left-column">
+        <section class="glass-card">
+          <h3>Upload Anything to Laptop</h3>
+          <p class="muted-text">Videos, photos, archives, documents, or APKs stream straight to the laptop folder.</p>
+
+          <div id="dropZone" class="drop-zone" role="button" tabindex="0">
+            <div class="drop-icon">↑</div>
+            <p class="drop-title">Drop files here or click to browse</p>
+            <span class="muted-text">Supports multiple files up to 2 GB per batch</span>
+            <input id="fileInput" type="file" multiple hidden />
+          </div>
+
+          <div id="uploadProgressWrap" class="progress-wrap hidden">
+            <div class="progress-track">
+              <div id="uploadProgressBar" class="progress-fill"></div>
+            </div>
+            <span id="uploadProgressText" class="muted-text">Uploading... 0%</span>
+          </div>
+        </section>
+
+        <section class="glass-card">
+          <h3>Store Text / Data Record</h3>
+          <p class="muted-text">Save links, code snippets, or notes inside your laptop's JSON database.</p>
+
+          <div class="form-stack">
+            <input id="noteTitleInput" class="capsule-input" type="text" placeholder="Record title (e.g. API Key, Note)" />
+            <textarea id="noteContentInput" class="glass-textarea" rows="4" placeholder="Write anything you want to store..."></textarea>
+            <div id="saveNoteBtn" class="capsule-btn primary full-width" role="button" tabindex="0">
+              Save to Laptop Database
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Right Column: Stored Items Explorer -->
+      <section class="glass-card explorer-card">
+        <div class="explorer-toolbar">
+          <input id="searchInput" class="capsule-input search-input" type="text" placeholder="Search your stored files & notes..." />
+          <div class="filter-group">
+            <div id="filterAll" class="capsule-chip active" role="button" tabindex="0">All</div>
+            <div id="filterFiles" class="capsule-chip" role="button" tabindex="0">Files</div>
+            <div id="filterNotes" class="capsule-chip" role="button" tabindex="0">Notes</div>
+          </div>
+        </div>
+
+        <div id="itemsGrid" class="items-list"></div>
+        <div id="emptyState" class="empty-state hidden">
+          <p>Your laptop vault is empty.</p>
+          <span class="muted-text">Upload a file or save a note on the left to store it permanently on the laptop.</span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="glass-footer">
+      © 2026 Sanchar Koirala | All rights reserved
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
